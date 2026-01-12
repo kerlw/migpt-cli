@@ -26,7 +26,7 @@
 ###### 尝试构建 armv7l 的过程 ######
 
 #FROM env-$TARGETARCH
-FROM node:20.15.0-alpine3.20
+FROM node:lts-alpine
 RUN npm install -g migpt-server@1.12.0
 EXPOSE 36592
 VOLUME /root/.migptgui
