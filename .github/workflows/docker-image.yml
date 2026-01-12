@@ -17,7 +17,7 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}  # 自动获取当前GitHub用户名
         password: ${{ secrets.GHCR_TOKEN }}  # 引用之前设置的Secrets
-    - name: Push image to ghcr
+    - name: Build & push image to ghcr
       uses: docker/build-push-action@v5
       with:
         context: .  # Docker构建上下文（项目根目录）
@@ -26,5 +26,5 @@ jobs:
         tags: |
           ghcr.io/${{ github.actor }}/${{ github.repository_name }}:${{ github.sha }}
           ghcr.io/${{ github.actor }}/${{ github.repository_name }}:latest
-        cache-from: type=gha  # 缓存构建层，加速下次构建
-        cache-to: type=gha,mode=max
+        cache-from: type=registry,ref=ghcr.io/${{ github.actor }}/${{ github.repository_name }}:buildcache
+        cache-to: type=registry,ref=ghcr.io/${{ github.actor }}/${{ github.repository_name }}:buildcache,mode=max
