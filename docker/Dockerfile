@@ -25,11 +25,14 @@
 #COPY . .
 ###### 尝试构建 armv7l 的过程 ######
 
-#FROM env-$TARGETARCH
 FROM node:lts-alpine
+
+# 设置 npm 配置，跳过 postinstall 脚本
+ENV npm_config_ignore_scripts=true
+
+# 安装全局包（跳过 postinstall 脚本）
 RUN npm install -g migpt-server@1.12.0
+
 EXPOSE 36592
 VOLUME /root/.migptgui
 ENTRYPOINT ["migpt-server"]
-
-###### 运行阶段结束 ######

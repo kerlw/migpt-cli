@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -6,7 +7,7 @@ export default {
   content: [
     './src/**/*.{ts,tsx,html,js}',
     path.join(
-      path.dirname(require.resolve('@migptgui/options')),
+      path.dirname(fileURLToPath(import.meta.resolve('@migptgui/options'))),
       '**/*.{ts,tsx,html,js}',
     ),
   ],
